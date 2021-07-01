@@ -1,0 +1,45 @@
+[System]
+Name='Fuzzy_LFR'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=5
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+ 
+[Input1]
+Name='Right_Sensor'
+Range=[0 600]
+NumMFs=3
+MF1='Black':'trapmf',[0 0 95 198]
+MF2='Grey':'trimf',[95 198 301]
+MF3='White':'trapmf',[198 301 600 600]
+ 
+[Input2]
+Name='Left_Sensor'
+Range=[0 600]
+NumMFs=3
+MF1='Black':'trapmf',[0 0 67 139]
+MF2='Grey':'trimf',[67 139 211]
+MF3='White':'trapmf',[139 211 600 600]
+ 
+[Output1]
+Name='Output'
+Range=[-200 200]
+NumMFs=5
+MF1='Soft_Left':'trimf',[0 50 100]
+MF2='Soft_Right':'trimf',[-100 -50 0]
+MF3='Hard_Left':'trimf',[50 100 150]
+MF4='Hard_Right':'trimf',[-150 -100 -50]
+MF5='Forward':'trimf',[-50 0 50]
+ 
+[Rules]
+3 1, 4 (1) : 1
+3 2, 2 (1) : 1
+3 3, 5 (1) : 1
+2 3, 1 (1) : 1
+1 3, 3 (1) : 1
